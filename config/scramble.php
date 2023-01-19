@@ -10,8 +10,7 @@ return [
      */
     "api_path" => "api",
 
-    'api_domain' => env("APP_URL", "http://localhost"),
-
+    "api_domain" => env("APP_URL", "http://localhost"),
 
     "info" => [
         /*
