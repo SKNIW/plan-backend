@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Dedoc\Scramble\Http\Middleware\RestrictedDocsAccess;
-
 return [
     /*
      * Your API path. Full API base URL will be created using `url` helper: `url(config('scramble.api_path'))`.
@@ -11,6 +9,8 @@ return [
      * this behavior, you can add your custom routes resolver using `Scramble::routes()`.
      */
     "api_path" => "api",
+
+    "api_domain" => env("APP_URL", "http://localhost"),
 
     "info" => [
         /*
@@ -24,9 +24,13 @@ return [
         "description" => "",
     ],
 
+    "servers" => [
+        "Local" => "api",
+        "Prod" => env("APP_URL", "http://localhost"),
+    ],
+
     "middleware" => [
         "web",
-        RestrictedDocsAccess::class,
     ],
 
     "extensions" => [],

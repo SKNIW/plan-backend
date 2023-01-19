@@ -50,6 +50,11 @@ $app = require_once __DIR__ . "/../bootstrap/app.php";
 
 $kernel = $app->make(Kernel::class);
 
+Request::setTrustedProxies(
+    ["127.0.0.1", "REMOTE_ADDR"],
+    Request::HEADER_X_FORWARDED_TRAEFIK,
+);
+
 $response = $kernel->handle(
     $request = Request::capture(),
 )->send();
