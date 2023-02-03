@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Dto;
+namespace App\Http\Resources;
 
 use Illuminate\Support\Collection;
 use JsonSerializable;
 
-class LecturersDto implements JsonSerializable
+class LecturersResource implements JsonSerializable
 {
     public function __construct(
         public readonly Collection $lecturers,
