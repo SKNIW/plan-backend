@@ -41,6 +41,7 @@ class LecturesControllerTest extends TestCase
             ->andReturn(new EloqCollection($this->lectures));
 
         $fieldServiceMock = Mockery::mock(LecturesService::class)->makePartial()->shouldAllowMockingMethod("getAllLecturers");
+
         $fieldServiceMock->shouldReceive("getAllLecturers")
             ->once()
             ->andReturn(new Collection($this->lectures));
