@@ -16,9 +16,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN docker-php-ext-install intl bcmath mbstring bz2 gd zip pgsql pdo_pgsql opcache pcntl
 
-RUN pecl install swoole
-
-RUN docker-php-ext-enable intl pcntl swoole
+RUN docker-php-ext-enable intl pcntl
 
 RUN if [ ${INSTALL_XDEBUG} = true ]; then \
     pecl install xdebug-${XDEBUG_VERSION} \
