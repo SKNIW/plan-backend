@@ -49,7 +49,7 @@ class LecturesControllerTest extends TestCase
 
         $fieldResponse = $fieldControllerMock->index();
 
-        $this->assertEquals($fieldResponse->content(), '{"data":[{"day":"2022-10-04","hour":"08:15-09:45","group":"s1D1u","lecturer":"dr Ma\u0142gorzata Jusiakowska - Piputa","lesson":"Moi\u017c (lab)","lesson_room":"D18"}]}');
+        $this->assertEquals($fieldResponse->getContent(), '{"data":[{"day":"2022-10-04","hour":"08:15-09:45","group":"s1D1u","lecturer":"dr Ma\u0142gorzata Jusiakowska - Piputa","lesson":"Moi\u017c (lab)","lesson_room":"D18"}]}');
         $this->assertTrue($fieldResponse->isOk());
     }
 

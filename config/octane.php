@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Laravel\Octane\Contracts\OperationTerminated;
 use Laravel\Octane\Events\RequestHandled;
 use Laravel\Octane\Events\RequestReceived;
@@ -22,7 +24,6 @@ use Laravel\Octane\Listeners\StopWorkerIfNecessary;
 use Laravel\Octane\Octane;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Octane Server
@@ -36,7 +37,7 @@ return [
     |
     */
 
-    'server' => env('OCTANE_SERVER', 'roadrunner'),
+    "server" => env("OCTANE_SERVER", "roadrunner"),
 
     /*
     |--------------------------------------------------------------------------
@@ -49,7 +50,7 @@ return [
     |
     */
 
-    'https' => env('OCTANE_HTTPS', false),
+    "https" => env("OCTANE_HTTPS", false),
 
     /*
     |--------------------------------------------------------------------------
@@ -62,7 +63,7 @@ return [
     |
     */
 
-    'listeners' => [
+    "listeners" => [
         WorkerStarting::class => [
             EnsureUploadedFilesAreValid::class,
             EnsureUploadedFilesCanBeMoved::class,
@@ -127,11 +128,11 @@ return [
     |
     */
 
-    'warm' => [
+    "warm" => [
         ...Octane::defaultServicesToWarm(),
     ],
 
-    'flush' => [
+    "flush" => [
         //
     ],
 
@@ -146,9 +147,9 @@ return [
     |
     */
 
-    'cache' => [
-        'rows' => 1000,
-        'bytes' => 10000,
+    "cache" => [
+        "rows" => 1000,
+        "bytes" => 10000,
     ],
 
     /*
@@ -162,10 +163,10 @@ return [
     |
     */
 
-    'tables' => [
-        'example:1000' => [
-            'name' => 'string:1000',
-            'votes' => 'int',
+    "tables" => [
+        "example:1000" => [
+            "name" => "string:1000",
+            "votes" => "int",
         ],
     ],
 
@@ -180,16 +181,16 @@ return [
     |
     */
 
-    'watch' => [
-        'app',
-        'bootstrap',
-        'config',
-        'database',
-        'public/**/*.php',
-        'resources/**/*.php',
-        'routes',
-        'composer.lock',
-        '.env',
+    "watch" => [
+        "app",
+        "bootstrap",
+        "config",
+        "database",
+        "public/**/*.php",
+        "resources/**/*.php",
+        "routes",
+        "composer.lock",
+        ".env",
     ],
 
     /*
@@ -203,7 +204,7 @@ return [
     |
     */
 
-    'garbage' => 50,
+    "garbage" => 50,
 
     /*
     |--------------------------------------------------------------------------
@@ -216,14 +217,14 @@ return [
     |
     */
 
-    'max_execution_time' => 30,
+    "max_execution_time" => 30,
 
-    'swoole' => [
-        'options' => [
-            'http_compression' => true,
-            'http_compression_level' => 6, // 1 - 9
-            'compression_min_length' => 20,
-            'open_http2_protocol' => true
-        ]
-    ]
+    "swoole" => [
+        "options" => [
+            "http_compression" => true,
+            "http_compression_level" => 6, // 1 - 9
+            "compression_min_length" => 20,
+            "open_http2_protocol" => true,
+        ],
+    ],
 ];
