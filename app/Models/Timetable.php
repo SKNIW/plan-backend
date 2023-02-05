@@ -31,6 +31,8 @@ class Timetable extends Model
 {
     use HasFactory;
 
+    private const EMPTY_LECTURER = "-";
+
     protected $table = "timetable";
     protected $guarded = [
         "id",
@@ -84,7 +86,9 @@ class Timetable extends Model
     {
         return self::query()
             ->pluck("lecturer")
-            ->unique();
+            ->unique()
+            ->flip()
+            ->forget(self::EMPTY_LECTURER);
     }
 
     public static function getPlanByLecturerName(string $name): Collection

@@ -16,7 +16,7 @@ class LecturersResource implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            "data" => $this->lecturers->values()->jsonSerialize(),
+            "data" => $this->lecturers->keys()->jsonSerialize(),
         ];
     }
 }
