@@ -8,6 +8,7 @@ use App\Models\Utils\Constants;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Benchmark;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -85,6 +86,7 @@ class Timetable extends Model
     public static function getAllLecturers(): Collection
     {
         return self::query()
+            ->without('legend','specialization')
             ->pluck("lecturer")
             ->unique()
             ->flip()
