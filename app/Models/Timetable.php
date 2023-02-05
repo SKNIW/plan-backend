@@ -86,10 +86,9 @@ class Timetable extends Model
     {
         return self::query()
             ->without("legend", "specialization")
+            ->whereNot("lecturer", "=", self::EMPTY_LECTURER)
             ->pluck("lecturer")
-            ->unique()
-            ->flip()
-            ->forget(self::EMPTY_LECTURER);
+            ->unique();
     }
 
     public static function getPlanByLecturerName(string $name): Collection
