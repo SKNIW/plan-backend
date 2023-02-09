@@ -7,11 +7,13 @@ namespace App\Http\Resources;
 use App\Models\Field;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property Field $resource
+ */
 class FacultyFieldResource extends JsonResource
 {
     public function toArray($request): array
     {
-        /** @var Field $field */
         $field = $this->resource;
 
         return [
