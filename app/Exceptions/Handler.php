@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use App\Exceptions\Api\ApiErrorHandlerService;
+use App\Exceptions\Api\ErrorHandlerService;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
@@ -24,7 +24,7 @@ class Handler extends ExceptionHandler
 
     public function __construct(
         Container $container,
-        private readonly ApiErrorHandlerService $apiErrorHandlerService,
+        private readonly ErrorHandlerService $apiErrorHandlerService,
     ) {
         parent::__construct($container);
     }

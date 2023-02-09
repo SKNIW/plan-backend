@@ -7,7 +7,7 @@ namespace App\Exceptions\Api;
 use Illuminate\Http\JsonResponse;
 use Throwable;
 
-class ApiErrorHandlerService
+class ErrorHandlerService
 {
     public function handleError(Throwable $exception): JsonResponse
     {
