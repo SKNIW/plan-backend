@@ -7,11 +7,13 @@ namespace App\Http\Resources;
 use App\Models\Specialization;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property Specialization $resource
+ */
 class SpecializationSimpleResource extends JsonResource
 {
     public function toArray($request): array
     {
-        /** @var Specialization $specialization */
         $specialization = $this->resource;
 
         return [

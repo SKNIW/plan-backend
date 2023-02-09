@@ -15,11 +15,24 @@ class LecturesController extends Controller
         public LecturesService $service,
     ) {}
 
+    /**
+     * Get all lectures
+     *
+     * @phpstan-ignore-next-line
+     * @return array{data: array<LecturersResource>}
+     */
     public function index(): Response
     {
         return new Response(new LecturersResource($this->service->getAllLecturers()));
     }
 
+    /**
+     * Get plan by lecturer name
+     *
+     * @param string $name Lecturer name.
+     * @phpstan-ignore-next-line
+     * @return array{data: array<LecturerTimetableResource>}
+     */
     public function getPlanForLecturerByName(string $name): LecturerTimetableResource
     {
         return $this->service->getPlanByLecturerByName($name);

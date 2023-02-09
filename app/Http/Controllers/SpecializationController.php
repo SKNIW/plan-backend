@@ -16,21 +16,47 @@ class SpecializationController extends Controller
         public SpecializationService $service,
     ) {}
 
+    /**
+     * Get all specializations
+     * @phpstan-ignore-next-line
+     * @return array{data: array<SpecializationResource>}
+     */
     public function index(): ResourceCollection
     {
         return $this->service->getAllSpecializations();
     }
 
+    /**
+     * Get plan by specialization id
+     *
+     * @param int $id Specialization id.
+     * @phpstan-ignore-next-line
+     * @return array{data: array<SpecializationTimetableResource>}
+     */
     public function timetableIndex(int $id): SpecializationTimetableResource
     {
         return $this->service->getTimetableBySpecialization($id);
     }
 
+    /**
+     * Get legend by specilization id
+     *
+     * @param int $id Specialization id.
+     * @phpstan-ignore-next-line
+     * @return array{data: array<SpecializationLegendResource>}
+     */
     public function legendIndex(int $id): SpecializationLegendResource
     {
         return $this->service->getLegendBySpecialization($id);
     }
 
+    /**
+     * Show specialization by id
+     *
+     * @param int $id Specialization id.
+     * @phpstan-ignore-next-line
+     * @return array{data: array<SpecializationResource>}
+     */
     public function show(int $id): SpecializationResource
     {
         return $this->service->getSpecializationById($id);
