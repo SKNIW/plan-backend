@@ -89,8 +89,17 @@ class Specialization extends Model
      */
     public static function findBySpecializationIdWitchLegend(int $specializationId): self
     {
-        /** @var self|null $specialization */
-        $specialization = self::query()->with("timetable", "timetable.legend")->where("id", $specializationId)
+        /** @var self|null $specialization
+         * @phpstan-ignore-next-line
+         */
+        $specialization = self::query()
+            ->with([
+                "timetable" => function ($query): void {
+                    $query->where("lecturer", "!=", Timetable::EMPTY_LECTURER);
+                },
+                "timetable.legend",
+            ])
+            ->where("id", $specializationId)
             ->first();
 
         if ($specialization === null) {
