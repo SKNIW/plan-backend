@@ -23,6 +23,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command("timetable:all")->hourly();
         $schedule->command("horizon:snapshot")->everyFiveMinutes();
+        $schedule->command("queue:flush")->weekly();
+        $schedule->command("queue:prune-batches")->weekly();
     }
 
     /**
