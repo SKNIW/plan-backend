@@ -18,7 +18,7 @@ class SpecializationLegendResource extends JsonResource
 
         return [
             "id" => $specialization->id,
-            "legend" => SpecializationLegendRowResource::collection($specialization->getLegend()),
+            "legend" => SpecializationLegendRowResource::collection($specialization->legend),
         ];
     }
 }

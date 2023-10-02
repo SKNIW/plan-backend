@@ -14,13 +14,13 @@ class SpecializationService
 {
     public function getAllSpecializations(): ResourceCollection
     {
-        $specializations = Specialization::query()->get();
+        $specializations = Specialization::getAllSpecializationWitchField();
         return SpecializationResource::collection($specializations);
     }
 
     public function getTimetableBySpecialization(int $specializationId): SpecializationTimetableResource
     {
-        $specialization = Specialization::findBySpecializationId($specializationId);
+        $specialization = Specialization::findBySpecializationIdWitchLegend($specializationId);
         return new SpecializationTimetableResource($specialization);
     }
 
@@ -32,7 +32,7 @@ class SpecializationService
 
     public function getSpecializationById(int $specializationId): SpecializationResource
     {
-        $specialization = Specialization::findBySpecializationId($specializationId);
+        $specialization = Specialization::findBySpecializationIdWitchField($specializationId);
         return new SpecializationResource($specialization);
     }
 }
