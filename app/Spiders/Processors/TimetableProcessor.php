@@ -120,6 +120,7 @@ class TimetableProcessor extends CustomItemProcessor
     private function saveOrUpdateTimetable(Collection $timetables): void
     {
         $timetables->each(function ($timetable): void {
+            /** @phpstan-ignore-next-line  */
             $instance = Timetable::getInstanceByDayHourAndGroup($timetable);
             if ($instance === null) {
                 $timetable->save();

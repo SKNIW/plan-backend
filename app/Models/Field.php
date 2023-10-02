@@ -52,14 +52,12 @@ class Field extends Model
      */
     public static function findByFieldId(int $fieldId): self
     {
-        /** @var \Illuminate\Database\Eloquent\Collection|null $fields */
-        $fields = self::query()->where("id", $fieldId)
-            ->limit(1)
-            ->get();
+        /** @var self|null $field */
+        $field = self::query()->where("id", $fieldId)->first();
 
-        if ($fields->first() === null) {
+        if ($field === null) {
             throw new FieldNotFoundException();
         }
-        return $fields->first();
+        return $field;
     }
 }

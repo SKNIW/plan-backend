@@ -56,6 +56,7 @@ class Specialization extends Model
     {
         $legend = new Collection();
 
+        /** @var Timetable $timetableRow */
         foreach ($this->getFilteredTimetable() as $timetableRow) {
             $legend->add($timetableRow->legend);
         }
@@ -73,14 +74,12 @@ class Specialization extends Model
      */
     public static function findBySpecializationId(int $specializationId): self
     {
-        /** @var Collection|null $specialization */
-        $specialization = self::query()->where("id", $specializationId)
-            ->limit(1)
-            ->get();
+        /** @var self|null $specialization */
+        $specialization = self::query()->where("id", $specializationId)->first();
 
-        if ($specialization->first() === null) {
+        if ($specialization === null) {
             throw new SpecializationNotFoundException();
         }
-        return $specialization->first();
+        return $specialization;
     }
 }

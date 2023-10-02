@@ -38,14 +38,13 @@ class Faculty extends Model
      */
     public static function findByFacultyId(int $facultyId): self
     {
-        /** @var \Illuminate\Database\Eloquent\Collection|null $faculty */
+        /** @var self|null $faculty */
         $faculty = self::query()->where("id", $facultyId)
-            ->limit(1)
-            ->get();
+            ->first();
 
-        if ($faculty->first() === null) {
+        if ($faculty === null) {
             throw new FacultyNotFoundException();
         }
-        return $faculty->first();
+        return $faculty;
     }
 }
