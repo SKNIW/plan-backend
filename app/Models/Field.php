@@ -53,7 +53,7 @@ class Field extends Model
     public static function findByFieldId(int $fieldId): self
     {
         /** @var self|null $field */
-        $field = self::query()->where("id", $fieldId)->first();
+        $field = self::query()->with('specializations')->where("id", $fieldId)->first();
 
         if ($field === null) {
             throw new FieldNotFoundException();

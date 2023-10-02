@@ -52,34 +52,36 @@ class Specialization extends Model
         return $this->hasMany(Legend::class);
     }
 
-    public function getLegend(): Collection
-    {
-        $legend = new Collection();
-
-        /** @var Timetable $timetableRow */
-        foreach ($this->getFilteredTimetable() as $timetableRow) {
-            $legend->add($timetableRow->legend);
-        }
-
-        return $legend->unique("id")->whereNotNull();
-    }
-
-    public function getFilteredTimetable(): Collection
-    {
-        return $this->timetable->whereNotNull("legend_id");
-    }
-
     /**
      * @throws SpecializationNotFoundException
      */
     public static function findBySpecializationId(int $specializationId): self
     {
         /** @var self|null $specialization */
-        $specialization = self::query()->where("id", $specializationId)->first();
+        $specialization = self::query()->with(['timetable' => function ($query) {
+            $query->whereNotNull("legend_id");
+        }])->where("id", $specializationId)
+            ->first();
 
         if ($specialization === null) {
             throw new SpecializationNotFoundException();
         }
         return $specialization;
     }
+
+    /**
+     * @throws SpecializationNotFoundException
+     */
+    public static function findBySpecializationIdWitchField(int $specializationId): self
+    {
+        /** @var self|null $specialization */
+        $specialization = self::query()->with('field')->where("id", $specializationId)
+            ->first();
+
+        if ($specialization === null) {
+            throw new SpecializationNotFoundException();
+        }
+        return $specialization;
+    }
+
 }

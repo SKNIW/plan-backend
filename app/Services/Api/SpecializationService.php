@@ -14,7 +14,7 @@ class SpecializationService
 {
     public function getAllSpecializations(): ResourceCollection
     {
-        $specializations = Specialization::query()->get();
+        $specializations = Specialization::query()->with('field','field.faculty')->get();
         return SpecializationResource::collection($specializations);
     }
 
@@ -32,7 +32,7 @@ class SpecializationService
 
     public function getSpecializationById(int $specializationId): SpecializationResource
     {
-        $specialization = Specialization::findBySpecializationId($specializationId);
+        $specialization = Specialization::findBySpecializationIdWitchField($specializationId);
         return new SpecializationResource($specialization);
     }
 }
