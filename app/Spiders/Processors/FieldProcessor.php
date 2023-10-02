@@ -16,7 +16,7 @@ final class FieldProcessor extends CustomItemProcessor
      */
     public function processItem(ItemInterface $item): ItemInterface
     {
-        $faculty = Faculty::query()->where("external_id", $item->facultyExternalId)->first();
+        $faculty = Faculty::query()->with("fields")->where("external_id", $item->facultyExternalId)->first();
 
         /** @var Faculty $faculty */
         $faculty->fields()->firstOrCreate([

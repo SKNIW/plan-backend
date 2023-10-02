@@ -17,7 +17,7 @@ final class LegendProcessor extends CustomItemProcessor
     public function processItem(ItemInterface $item): ItemInterface
     {
         /** @var Specialization $specialization */
-        $specialization = Specialization::query()->where("slug", $item->specializationSlug)->first();
+        $specialization = Specialization::query()->with("legend")->where("slug", $item->specializationSlug)->first();
 
         $specialization->legend()->firstOrCreate([
             "slug" => $item->slug,

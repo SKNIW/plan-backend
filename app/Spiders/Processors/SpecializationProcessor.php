@@ -16,7 +16,7 @@ final class SpecializationProcessor extends CustomItemProcessor
      */
     public function processItem(ItemInterface $item): ItemInterface
     {
-        $field = Field::query()->where("slug", $item->fieldSlug)->first();
+        $field = Field::query()->with("specializations")->where("slug", $item->fieldSlug)->first();
 
         $field->specializations()->firstOrCreate([
             "name" => $item->name,
