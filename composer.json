@@ -15,7 +15,6 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "predis/predis": "^2.0",
-        "rennokki/laravel-eloquent-query-cache": "^3.3",
         "roach-php/laravel": "^1.0",
         "spatie/laravel-responsecache": "^7.4"
     },
