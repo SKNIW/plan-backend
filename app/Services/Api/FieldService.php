@@ -13,7 +13,7 @@ class FieldService
 {
     public function getAllFields(): ResourceCollection
     {
-        $fields = Field::query()->with('faculty','specializations')->get();
+        $fields = Field::getAllFieldWitchFacultyAndSpecialization();
         return FieldResource::collection($fields);
     }
 

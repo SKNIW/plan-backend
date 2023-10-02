@@ -58,7 +58,7 @@ class Specialization extends Model
     public static function findBySpecializationId(int $specializationId): self
     {
         /** @var self|null $specialization */
-        $specialization = self::query()->with(['timetable' => function ($query) {
+        $specialization = self::query()->with(["timetable" => function ($query): void {
             $query->whereNotNull("legend_id");
         }])->where("id", $specializationId)
             ->first();
@@ -75,7 +75,7 @@ class Specialization extends Model
     public static function findBySpecializationIdWitchField(int $specializationId): self
     {
         /** @var self|null $specialization */
-        $specialization = self::query()->with('field')->where("id", $specializationId)
+        $specialization = self::query()->with("field")->where("id", $specializationId)
             ->first();
 
         if ($specialization === null) {
@@ -84,4 +84,26 @@ class Specialization extends Model
         return $specialization;
     }
 
+    /**
+     * @throws SpecializationNotFoundException
+     */
+    public static function findBySpecializationIdWitchLegend(int $specializationId): self
+    {
+        /** @var self|null $specialization */
+        $specialization = self::query()->with("timetable", "timetable.legend")->where("id", $specializationId)
+            ->first();
+
+        if ($specialization === null) {
+            throw new SpecializationNotFoundException();
+        }
+        return $specialization;
+    }
+
+    /**
+     * @throws SpecializationNotFoundException
+     */
+    public static function getAllSpecializationWitchField(): Collection
+    {
+        return self::query()->with("field", "field.faculty")->get();
+    }
 }

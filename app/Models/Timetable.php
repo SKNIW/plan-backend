@@ -85,17 +85,17 @@ class Timetable extends Model
     public static function getAllLecturers(): Collection
     {
         return self::query()
-            ->where("lecturer", '!=', self::EMPTY_LECTURER)
-            ->distinct('lecturer')
+            ->where("lecturer", "!=", self::EMPTY_LECTURER)
+            ->distinct("lecturer")
             ->pluck("lecturer");
     }
 
-
     public static function getPlanByLecturerName(string $name): Collection
     {
+        /** @phpstan-ignore-next-line  */
         return self::query()
             ->where("lecturer", "LIKE", "%" . $name . "%")
-            ->with('legend')
+            ->with("legend")
             ->get();
     }
 
