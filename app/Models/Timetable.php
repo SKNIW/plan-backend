@@ -31,7 +31,7 @@ class Timetable extends Model
 {
     use HasFactory;
 
-    private const EMPTY_LECTURER = "-";
+    public const EMPTY_LECTURER = "-";
 
     protected $table = "timetable";
     protected $guarded = [
