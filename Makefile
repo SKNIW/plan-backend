@@ -1,67 +1,36 @@
+PHP_FPM_SERVICE_NAME=app
+NODE_SERVICE_NAME=node
+.PHONY: setup build run php test test-php fix stop  restart analyse kill-all
 .DEFAULT_GOAL := help
-install: ## Init project
-	cp -n .env.example .env
-	docker-compose build
-	docker-compose up -d
-	docker-compose exec php composer install
-	$(MAKE) key-generate
-	$(MAKE) db-create
-	$(MAKE) db-seed
 
-key-generate: ## Create application key
-	docker-compose exec php php artisan key:generate
+setup: ## Init project
+	sh ./.docker/dev/setup.sh
 
-db-create: ## Run migration
-	docker-compose exec php php artisan migrate
+build: ## Build containers in project
+	docker compose build --no-cache --pull
 
-db-seed: ## Run seeders
-	docker-compose run php php artisan db:seed
+run: ## Start project
+	docker compose up -d
 
-start: ## Run docker for a project
-	docker-compose up -d
+php: ## Enter php container
+	docker compose exec app bash
 
-stop: ## Stop all containers for a project
-	docker-compose down --remove-orphans
+test: ## Run unit tests
+	docker compose exec ${PHP_FPM_SERVICE_NAME} php artisan test
 
-bash: ## Exec bash for php container
-	docker-compose exec php bash
+fix: ## Run global linting code php
+	docker compose exec ${PHP_FPM_SERVICE_NAME} composer csf
 
-phpstan: ## Run static analysis a code for a php container
-	docker-compose exec php composer phpstan
+analyse: ## Run static analyse code
+	docker compose exec ${PHP_FPM_SERVICE_NAME} composer analyse
 
-phpunit: ## Run tests for a php container
-	docker-compose exec php composer test
+stop: ## Stop project
+	docker compose stop
 
-cs-check: ## Run check for a linter
-	docker-compose exec php composer cs:check
-
-cs-fix: ## Run linter
-	docker-compose exec php composer cs:fix
-
-run-tests: ## Run stage for test
-	$(MAKE) cs-check
-	$(MAKE) phpunit
-
-fix-permissions: ## Change permision for volumen a php container
-	docker-compose exec php	usermod -u 1000 www-data
-
-start-queue: ## Start work for queue
-	docker-compose exec php php artisan queue:work
-
-composer-update: ## Run composer update for php container
-	docker-compose exec php composer update
-
-redis-cli: ## Exec redis container cli
-	docker-compose exec redis redis-cli
-
-kill-all: ## Kill all running containers
+kill-all: ## Kill all containers
 	docker container kill $$(docker container ls -q)
 
-retry-fails-jobs: ## Retry all fails jobs
-    docker-compose exec php php artisan queue:retry all
-
-openapi: ## Generate api documentation
-    docker-compose exec php php artisan lrd:generate
+restart: stop run
 
 .PHONY: help
 help:
