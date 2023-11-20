@@ -56,12 +56,9 @@
         "post-create-project-cmd": [
           "@php artisan key:generate --ansi"
         ],
-        "cs:fix": "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php",
-        "cs:check": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
-        "phpstan": "./vendor/bin/phpstan analyse",
-        "test": "phpunit",
-        "fast-tests": "./vendor/bin/paratest --processes 6",
-        "code-coverage": "./vendor/bin/phpunit --coverage-html ./reports"
+        "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
+        "csf": "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php",
+        "analyse": "./vendor/bin/phpstan analyse"
     },
     "extra": {
         "laravel": {
