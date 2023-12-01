@@ -19,7 +19,7 @@
         "spatie/laravel-responsecache": "^7.4"
     },
     "require-dev": {
-        "blumilksoftware/codestyle": "^1.8",
+        "blumilksoftware/codestyle": "^2.7",
         "brianium/paratest": "^6.8",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.4",
